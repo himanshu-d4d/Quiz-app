@@ -41,21 +41,9 @@
                 <label for="inputName">Category</label>
                 <select name="category" class="form-control">
                  <option value="">Select</option>
-                   @foreach($categories as $category)
-                      <option value="{{$category->id}}"<?php echo $category->id == $questionData->category_id ?'selected':'' ?> >{{$category->cat_first_word}} <span>{{$category->cat_remaining_word}}</span></option>
-                    @endforeach  
-                </select>
-                @if ($errors->has('ename')) <p class="alert-danger">{{ $errors->first('ename') }}</p> @endif
-              </div>
-              <div class="form-group">
-                <label for="inputName">Next Action</label>
-                <select name="category_sequence" id="cars" class="form-control">
-                 <option value="">Select</option>
-                 <option value="null" <?php echo 'null' == $questionData->next_action ?'selected':'' ?>>Add one</option>
-                 <option value="finish" <?php echo 'finish' == $questionData->next_action ?'selected':'' ?>>Finish</option>
-                   @foreach($categories as $category)
-                      <option value="{{$category->cat_sequence_no}}" <?php echo $category->cat_sequence_no == $questionData->next_action ?'selected':'' ?>>{{$category->cat_first_word}} <span>{{$category->cat_remaining_word}}</span></option>
-                    @endforeach  
+                   
+                      <option value="{{$categories->cat_sequence_no}}"<?php echo $categories->cat_sequence_no == $categories->cat_sequence_no ?'selected':'' ?> >{{$categories->cat_first_word}} <span>{{$categories->cat_remaining_word}}</span></option>
+                     
                 </select>
                 @if ($errors->has('ename')) <p class="alert-danger">{{ $errors->first('ename') }}</p> @endif
               </div>

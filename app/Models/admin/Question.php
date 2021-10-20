@@ -10,11 +10,11 @@ class Question extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_id',
+        'category_order',
+        'queston_no',
         'question',
         'answer_type',
-        'answers',
-        'status'
+        'background_color'
         
     ];
 }

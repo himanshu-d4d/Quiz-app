@@ -26,8 +26,7 @@ class QuestionController extends Controller
            $data = $request->all();
            //dd($data);
            $question = new Question;
-                $question['category_id'] = $data['category'];
-                $question['next_action'] = $data['category_sequence'];
+                $question['category_order'] = $data['category_sequence'];
                 $question['question'] = $data['question'];
                 $question['queston_no'] = $data['question_sequence'];
                 $question['answer_type'] = $data['answer_type'];
@@ -46,7 +45,7 @@ class QuestionController extends Controller
        try{
             $questionData = DB::table('questions')
             ->select('categories.cat_first_word','categories.cat_remaining_word','questions.*')
-            ->join('categories', 'categories.id','=','questions.category_id')
+            ->join('categories', 'categories.cat_sequence_no','=','questions.category_order')
             ->paginate('10');
             //dd($questionData);
             return view('admin.question.question_list')->with(compact('questionData'));
@@ -56,9 +55,10 @@ class QuestionController extends Controller
   }
   public function editQuestion($id){
     try{
+     // dd($id);
          $questionData = Question::find($id);
          //dd($questionData);
-         $categories = Category::all();
+         $categories = Category::where('cat_sequence_no',$questionData['category_order'])->first();
          return view('admin.question.edit_question')->with(compact('questionData','categories'));
       }catch(Exception $e){
       echo $e->getMessage();
@@ -68,9 +68,10 @@ class QuestionController extends Controller
     try{
         
         $questionData =$request->all();
+        //dd($questionData);
         Question::where('id',$questionData['id'])
-        ->update(['queston_no'=>$questionData['question_sequence'],'category_id'=>$questionData['category'],
-        'question'=>$questionData['question'],'answer_type'=>$questionData['answer_type'],'next_action'=>$questionData['category_sequence'],
+        ->update(['queston_no'=>$questionData['question_sequence'],'category_order'=>$questionData['category'],
+        'question'=>$questionData['question'],'answer_type'=>$questionData['answer_type'],
         'background_color'=>$questionData['color']]);
         Alert::success('Updated', 'Question update Successfully !!');
         return redirect('admin/view-question');

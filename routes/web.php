@@ -6,6 +6,8 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\QuestionController;
 use App\Http\Controllers\admin\SnippetsController;
 use App\Http\Controllers\admin\AnswerController;
+use App\Http\Controllers\quiz\UserController;
+
 
 
 
@@ -76,14 +78,23 @@ Route::group(['middleware' => 'auth:admin'], function(){
          Route::post('/update-answers', [AnswerController::class, 'updateAnswer']);
          Route::get('/delete-answers/{id}', [AnswerController::class, 'deleteAnswer']); 
  
- 
- 
-
-
-
-  
- 
-
- 
      });
 });
+////////////////////////// user login routes //////////////////////////////////////////////
+
+        Route::get('user/login', [UserController::class, 'userLogin']);
+        Route::post('user/login-attempt', [UserController::class, 'loginAttempt']);
+        Route::get('user/signup', [UserController::class, 'userSignUp']);
+        Route::post('user/signup-store', [UserController::class, 'storeSignUp']);
+        Route::get('main-section', [UserController::class, 'mainSection']);
+        Route::get('logout', [UserController::class, 'logout']);
+        Route::get('question/{id}', [UserController::class, 'question']);
+        Route::get('submit-answer', [UserController::class, 'submitAnswer']);
+        Route::get('next-question/{id}', [UserController::class, 'NextQuestion']);
+        Route::get('next-category/{id}', [UserController::class, 'nextCategory']);
+        Route::get('finish', [UserController::class, 'finish']);
+        Route::get('access', [UserController::class, 'access']);
+        Route::get('result', [UserController::class, 'viewPdf']);
+        Route::get('result/pdf', [UserController::class, 'createPDF']);
+
+       

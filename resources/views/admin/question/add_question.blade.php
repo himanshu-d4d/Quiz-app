@@ -38,20 +38,8 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputName">Category</label>
-                <select name="category" class="form-control">
+                <select name="category_sequence" class="form-control">
                  <option value="">Select</option>
-                   @foreach($categories as $category)
-                      <option value="{{$category->id}}">{{$category->cat_first_word}} <span>{{$category->cat_remaining_word}}</span></option>
-                    @endforeach  
-                </select>
-                @if ($errors->has('ename')) <p class="alert-danger">{{ $errors->first('ename') }}</p> @endif
-              </div>
-              <div class="form-group">
-                <label for="inputName">Next Action</label>
-                <select name="category_sequence" id="cars" class="form-control">
-                 <option value="">Select</option>
-                 <option value="null">Add one</option>
-                 <option value="finish">Finish</option>
                    @foreach($categories as $category)
                       <option value="{{$category->cat_sequence_no}}">{{$category->cat_first_word}} <span>{{$category->cat_remaining_word}}</span></option>
                     @endforeach  

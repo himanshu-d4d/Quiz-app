@@ -32,11 +32,13 @@ class AnswerController extends Controller
         foreach($data['answers'] as $x=>$val){
             //dd($snippets);
             $answers['snippets_no'] = $request->snippets_no[$x];
-            $answers['question_id'] = $request->question; 
+            $answers['question_order'] = $request->question; 
+           
             $answers['answers'] = $val; 
             //dd($answers);
-            $result = Answer::Create($answers,);
+            $result = Answer::Create($answers);
              }
+             return redirect("admin/view-answers/".$request->question);
         }catch(Exception $e){
             echo $e->getMessage();
           } 
@@ -45,7 +47,7 @@ class AnswerController extends Controller
         try{
              $answers = DB::table('answers')
              ->select('questions.question','answers.*')
-             ->join('questions', 'answers.question_id','=', 'questions.id')
+             ->join('questions', 'answers.question_order','=', 'questions.queston_no')
              ->where('questions.id',$id)
              ->paginate(5);
              //dd($answers);

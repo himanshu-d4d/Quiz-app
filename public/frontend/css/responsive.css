@@ -1,0 +1,408 @@
+@media only screen and (min-width:1500px)
+{
+.container 
+{
+    max-width: 1500px;
+}	
+.same-category-image p 
+{
+    line-height: 60px;
+}
+.same-category-image button.btn.btn-primary 
+{
+    max-width: 550px;
+    padding: 15px 45px 15px 85px;
+}
+.same-category-image .project-setion-inner 
+{
+    height: 80%;
+}
+}
+@media only screen and (max-width:1499px)
+{
+.section-page-four {
+    position: initial;
+    padding-bottom: 60px;
+}
+.section-page-four h1 {
+    line-height: 80px;
+}
+.radio-next-ques-main label.main-radio 
+{
+    margin-bottom: 35px;
+}
+.question-radio.radio-ques-next {
+    margin-top: 100px;
+}
+.background-wt-radio-questions 
+{
+    position: initial;
+    padding-bottom: 55px;
+}
+h1 
+{
+    font-size: 80px;
+}
+p 
+{
+    font-size: 30px;
+	line-height: 42px;
+}
+.btn 
+{
+    font-size: 30px;
+	line-height: 35px;
+}
+.same-para-class form label 
+{
+    font-size: 30px;
+}
+.same-para-class .btn 
+{
+    margin-top: 50px;
+}
+.same-para-class form 
+{
+    padding: 50px 0px 0px 118px;
+}
+.background-wt-radio-questions table td 
+{
+    font-size: 22px;
+    line-height: 30px;
+}
+.background-wt-radio-questions table th 
+{
+    font-size: 25px;
+    min-width: 220px;
+
+}
+.same-category-image button.btn.btn-primary 
+{
+    margin: 60px auto 0;
+}
+section.projection-section-main.signup-new {
+    position: initial;
+    padding: 50px 0px;
+}
+section.projection-section-main.signup-new .form-group {
+    margin-bottom: 20px;
+}
+section.projection-section-main.signup-new button.btn.btn-primary {
+    margin-top: 25px;
+}
+}
+
+@media only screen and (max-width:1199px)
+{
+.same-category-image .project-setion-inner {
+    height: 65%;
+}
+nav.navbar.navbar-expand-sm 
+{
+    padding: 20px 15px 20px;
+}
+h1 
+{
+    font-size: 70px!important;
+}
+p
+{
+    font-size: 25px!important;
+}
+.btn 
+{
+    font-size: 25px;
+}
+.same-para-class form label 
+{
+    font-size:25px;
+}
+.same-para-class .btn 
+{
+    margin-top: 40px;
+}
+
+}
+@media only screen and (max-width:991px)
+{
+.table-sections .project-setion-inner.same-category-image-new {
+    height: 100%;
+}
+.background-wt-radio-questions table.table {
+    display: block;
+    overflow-x: auto;
+	    margin: 50px 0px 50px;
+}
+.background-wt-radio-questions table th 
+{
+    font-size: 20px;
+}
+.background-wt-radio-questions table td {
+    font-size: 20px;
+}
+.category-one {
+    background-position: initial;
+}
+.section-page-four {
+    height: 100vh;
+}
+.question-radio.radio-ques-next {
+    margin-top: 40px;
+}
+.radio-next-ques-main label.main-radio {
+    margin-bottom: 30px;
+}
+.radio-next-ques-main label.main-radio {
+    min-height: 30px;
+}
+.main-radio {
+    font-size: 20px;
+    line-height: 30px;
+	    padding-left: 50px;
+
+}
+.background-wt-radio-questions .project-setion-inner {
+    height: 100vh;
+    display: block;
+}
+.question-radio {
+    padding-left: 0;
+}
+.main-radio .checkmark {
+    height: 30px;
+    width: 30px;
+}
+.background-color-wt-menu .project-setion-inner p {
+    margin: 25px 0px 25px;
+}
+nav.navbar.navbar-expand-sm li.nav-item a {
+    font-size: 20px;
+}
+.main-radio .checkmark:after {
+    width: 10px;
+    height: 10px;
+}
+.same-category-image .project-setion-inner {
+    height: 50%;
+}
+.btn 
+{
+    font-size: 20px;
+    text-align: center;
+    margin: 30px auto 0!important;
+    padding: 15px 30px 15px 30px!important;
+    border-radius: 5px;
+    max-width: inherit!important;
+    width: auto;
+    display: block!important;
+    line-height: 30px;
+}
+.same-para-class form .form-group 
+{
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+.same-para-class .btn 
+{
+    margin-top: 30px;
+}
+.same-para-class p 
+{
+    margin: 15px 0px 0px;
+}
+
+.same-para-class form label 
+{
+    font-size: 20px;
+}
+p
+{
+    font-size: 20px!important;
+    line-height: 30px;
+}
+h1 {
+    font-size: 50px!important;
+}
+
+
+
+.same-para-class form 
+{
+    padding: 20px 0px 0px 0px;
+}
+
+br {
+    display: none;
+}
+
+
+.project-setion-inner .col-sm-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.project-setion-inner 
+{
+    height: calc(100% - 430px);
+}
+.submit-main .form-group {
+    display: none;
+}
+.submit-main .project-setion-inner {
+    height:55%;
+    display: flex;
+    padding: 0;
+}
+.signup-new.projection-section-main .project-setion-inner {
+   height: 100vh;
+    display: block;
+}
+}
+@media only screen and (max-width:767px)
+{
+.signup-new.projection-section-main .project-setion-inner
+{
+padding-top:0px;	
+}
+.signup-new.projection-section-main {
+    height: 100%;
+}
+.submit-main .project-setion-inner {
+    height: 80%;
+}
+.radio-next-ques-main label.main-radio {
+    margin-bottom: 20px;
+}
+.background-wt-radio-questions table.table {
+    margin: 20px 0px 20px;
+}
+.background-wt-radio-questions table td {
+    font-size: 16px;
+    line-height: 20px;
+}
+.main-radio 
+{
+    margin: 0 0 15px;
+}
+.background-wt-radio-questions .project-setion-inner p 
+{
+    line-height: 25px;
+}
+
+.same-category-image-new p {
+    margin-bottom: 1rem;
+}
+.section-page-four h1 {
+    line-height: 50px;
+}
+.background-wt-radio-questions .project-setion-inner 
+{
+    height: 100%;
+}
+.background-wt-radio-questions.projection-section-main {
+    height: 100%;
+}
+.background-wt-radio-questions.background-color-wt-menu .project-setion-inner p {
+    margin: 20px 0px 20px;
+    line-height: 25px;
+}
+.background-wt-radio-questions .project-setion-inner {
+    padding: 0px 0px 25px;
+}
+.main-radio {
+    font-size: 16px;
+    line-height: 25px;
+}
+.same-category-image .project-setion-inner {
+    height: 75%;
+    display: flex;
+}
+.navbar-nav {
+    max-width: 100%;
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+nav.navbar.navbar-expand-sm li.nav-item 
+{
+    display: inline;
+}
+nav.navbar.navbar-expand-sm li.nav-item a {
+    font-size: 16px;
+    padding: 0px 3px;
+    display: inline;
+}
+nav.navbar.navbar-expand-sm li.nav-item:last-child img 
+{
+    margin: 0px 5px 0px 0px;
+    max-width: 30px;
+}
+.projection-section-main {
+    position: initial;
+}
+.project-setion-inner {
+    height: 100%;
+    display: block;
+    padding: 50px 0px;
+}
+.same-para-class form label {
+    font-size: 16px;
+}
+.btn {
+    font-size: 16px;
+    padding: 12px 30px 12px 30px!important;
+    line-height: 30px;
+}
+
+h1 
+{
+    font-size: 45px!important;
+	text-align: center;
+}
+p 
+{
+    font-size: 16px!important;
+    line-height: 25px;
+	text-align: center;
+}
+}
+
+@media only screen and (max-width:540px)
+{
+.projection-section-main {
+
+    height: 100vh;
+}
+}
+
+
+
+@media only screen and (max-width:374px)
+{
+nav.navbar.navbar-expand-sm li.nav-item a 
+{
+    font-size: 14px;
+    padding: 0px 5px;
+}
+
+}
+
+@media only screen and (max-width:359px)
+{
+nav.navbar.navbar-expand-sm li.nav-item:last-child 
+{
+    display: block;
+    margin-top: 15px;
+}
+.navbar-nav 
+{
+    text-align: center;
+}
+nav.navbar.navbar-expand-sm li.nav-item a 
+{
+    font-size: 16px;
+}
+h1 
+{
+font-size: 40px!important;
+}
+}
