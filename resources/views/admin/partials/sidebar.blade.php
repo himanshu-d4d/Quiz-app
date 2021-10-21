@@ -144,6 +144,23 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item {{ (request()->is('admin/view-report*') || request()->is('admin/expired-events-list*')) ? 'nav-item menu-is-opening menu-open' : 'nav-item'}}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa fa-plus"></i>
+              <p>
+                Reports
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{url('admin/view-report')}}" class="nav-link {{ (request()->is('admin/view-report*')) ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Reports</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="{{url('admin/logout')}}" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>

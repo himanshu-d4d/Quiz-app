@@ -60,7 +60,8 @@ class AnswerController extends Controller
         try{ 
              $snippets = Snippet::all();
             $answersData = Answer::find($id);
-            $question= Question::where('id',$answersData['question_id'])->first();
+            //dd($answersData);
+            $question= Question::where('queston_no',$answersData['question_order'])->first();
             //dd($question);
              return view('admin.answers.edit_answers')->with(compact('question','snippets','answersData'));
 

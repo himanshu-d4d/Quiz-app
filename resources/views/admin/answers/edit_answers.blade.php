@@ -41,7 +41,7 @@
               <div class="form-group">
                 <label for="inputName">Question</label>
                 <select name="question" class="form-control">
-                      <option value="{{$question->id}}">{{$question->question}}</option>  
+                      <option value="{{$question->queston_no}}">{{$question->question}}</option>  
                 </select>
                 @if ($errors->has('ename')) <p class="alert-danger">{{ $errors->first('ename') }}</p> @endif
               </div>

@@ -8,11 +8,13 @@ use App\Models\User;
 use App\Models\admin\Category;
 use App\Models\admin\Question;
 use App\Models\admin\Snippet;
+use App\Models\admin\Report;
+
 use DB;
 use Session;
 use Redirect;
 use PDF;
-
+use Storage;
 
 
 
@@ -116,11 +118,13 @@ class UserController extends Controller
         try{
             if (Auth::check()) {
                 $data = $request->all();
-                //dd( $data);
+                $answers = str_replace(["\r\n", "\n", "\r",], "", $data['answer']);
+                $questions = str_replace(["\r\n", "\n", "\r",], "", $data['question']);
+                //dd($content);
                  $snippets = Snippet::where('snippets_no',$data['snippets_no'])->select('snippets_text')->first();
                 // dd($snippets['snippets_text']);
-                Session::push('total',['answer',$data['answer'],'answer_type',$data['answer_type'],'snippets_text',$snippets['snippets_text'],
-                'category',$data['category_name'],'question',$data['question']]);
+                Session::push('total',['answer',$answers,'answer_type',$data['answer_type'],'snippets_text',$snippets['snippets_text'],
+                'category',$data['category_name'],'question',$questions]);
                 $returnData = ["question_no"=>$data['question_no']];
                if($question_no = $data['question_no'] + 1){
                  if(Question::where('queston_no',$question_no)->where('category_order',$data['category_order'])->first()){
@@ -195,15 +199,23 @@ class UserController extends Controller
   } 
 }
 public function createPDF() {
-  // retreive all records from db
+  $user = Auth::user();
+ // dd($user);
   $data = Session::all();
-    $allData = $data['total'];
-    
+  $allData = $data['total'];
+  $filename = "order_{$user['id']}_{$user['name']}";
+  $path = public_path('pdf');
       $pdf = PDF::loadView('pdf_view', compact("allData"))->setPaper('a4', 'landscape');
-      // download PDF file with download method
+      Storage::put('public/pdf/invoice.pdf', $pdf->output());
+ /////////////user data save in table////////////////////////////////
+           $userData = new Report;
+           $userData['user_name'] = $user['name'];
+           $userData['pdf'] = $filename;
+           $userData['date'] = date("y-m-d");
+           $userData->save();
       session()->flush();
-      return $pdf->download('pdf_file.pdf');
-      
+     // return $pdf->download('pdf_file.pdf');
+     return $pdf->download(''.$filename.'.pdf');
    
 
 }

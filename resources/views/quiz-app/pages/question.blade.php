@@ -85,15 +85,15 @@
 								  @foreach($answers as $answer)
 									<td>{{$answer->answers}}</td>
 									<td><label class="main-radio">
-									  <input type="radio"   name="{{'answer['.$answer->id.']'}}" class="snippets" value ="{{$answer->answers}}=>Not important" snippet-no="{{$answer->snippets_no}}"required>
+									  <input type="radio"   name="{{'answer['.$answer->id.']'}}" class="snippets" value ="{{$answer->answers}} = Not important" snippet-no="{{$answer->snippets_no}}"required>
 									  <span class="checkmark"></span>
 								</label></td>
 									<td><label class="main-radio">
-									  <input type="radio"   name="{{'answer['.$answer->id.']'}}" class="snippets" value ="{{$answer->answers}}=>Unsure" snippet-no="{{$answer->snippets_no}}" required>
+									  <input type="radio"   name="{{'answer['.$answer->id.']'}}" class="snippets" value ="{{$answer->answers}} = Unsure" snippet-no="{{$answer->snippets_no}}" required>
 									  <span class="checkmark"></span>
 								</label></td>
 								<td><label class="main-radio">
-									  <input type="radio"   name="{{'answer['.$answer->id.']'}}" class="snippets" value ="{{$answer->answers}}=>Important" snippet-no="{{$answer->snippets_no}}" required>
+									  <input type="radio"   name="{{'answer['.$answer->id.']'}}" class="snippets" value ="{{$answer->answers}} = Important" snippet-no="{{$answer->snippets_no}}" required>
 									  <span class="checkmark"></span>
 								</label></td>
 								  </tr>
