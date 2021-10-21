@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\QuestionController;
 use App\Http\Controllers\admin\SnippetsController;
 use App\Http\Controllers\admin\AnswerController;
+use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\quiz\UserController;
 
 
@@ -77,6 +78,10 @@ Route::group(['middleware' => 'auth:admin'], function(){
          Route::get('/edit-answers/{id}', [AnswerController::class, 'editAnswer']);
          Route::post('/update-answers', [AnswerController::class, 'updateAnswer']);
          Route::get('/delete-answers/{id}', [AnswerController::class, 'deleteAnswer']); 
+         /////////////////pdf route ////////////////////////////
+         Route::get('view-report', [ReportController::class, 'report']);
+         Route::get('download-pdf/{filename}', [ReportController::class, 'downloadPdf']);
+
  
      });
 });
@@ -96,5 +101,7 @@ Route::group(['middleware' => 'auth:admin'], function(){
         Route::get('access', [UserController::class, 'access']);
         Route::get('result', [UserController::class, 'viewPdf']);
         Route::get('result/pdf', [UserController::class, 'createPDF']);
+        
+
 
        

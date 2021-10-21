@@ -14,7 +14,7 @@ use DB;
 use Session;
 use Redirect;
 use PDF;
-use Storage;
+use File;
 
 
 
@@ -204,9 +204,9 @@ public function createPDF() {
   $data = Session::all();
   $allData = $data['total'];
   $filename = "order_{$user['id']}_{$user['name']}";
-  $path = public_path('pdf');
-      $pdf = PDF::loadView('pdf_view', compact("allData"))->setPaper('a4', 'landscape');
-      Storage::put('public/pdf/invoice.pdf', $pdf->output());
+  $path = storage_path('pdf');
+      $pdf = PDF::loadView('pdf_view', compact("allData"))->setPaper('a4', 'landscape')->save(''.$path.'/'.$filename.'.pdf');;
+     
  /////////////user data save in table////////////////////////////////
            $userData = new Report;
            $userData['user_name'] = $user['name'];
@@ -215,9 +215,19 @@ public function createPDF() {
            $userData->save();
       session()->flush();
      // return $pdf->download('pdf_file.pdf');
-     return $pdf->download(''.$filename.'.pdf');
-   
+     if(!file_exists(''.$path.'/'.$filename.'.pdf')){ // file does not exist
+      die('file not found');
+  }else {
+    header("Cache-Control: public");
+    header("Content-Description: File Transfer");
+    header("Content-Disposition: attachment; filename=$filename");
+    header("Content-Type: application/zip");
+    header("Content-Transfer-Encoding: binary");
 
+    // read the file from disk
+    readfile(''.$path.'/'.$filename.'.pdf');
+}
+     //return $pdf->download(''.$filename.'.pdf');
 }
 public function viewPdf(){
   try{
