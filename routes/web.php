@@ -87,7 +87,7 @@ Route::group(['middleware' => 'auth:admin'], function(){
 });
 ////////////////////////// user login routes //////////////////////////////////////////////
 
-        Route::get('user/login', [UserController::class, 'userLogin']);
+        Route::get('user/login', [UserController::class, 'userLogin'])->name('user-login');
         Route::post('user/login-attempt', [UserController::class, 'loginAttempt']);
         Route::get('user/signup', [UserController::class, 'userSignUp']);
         Route::post('user/signup-store', [UserController::class, 'storeSignUp']);
@@ -101,7 +101,10 @@ Route::group(['middleware' => 'auth:admin'], function(){
         Route::get('access', [UserController::class, 'access']);
         Route::get('result', [UserController::class, 'viewPdf']);
         Route::get('result/pdf', [UserController::class, 'createPDF']);
+        Route::get('user/report', [UserController::class, 'reports']);
+        Route::get('user/download-pdf/{filename}', [UserController::class, 'downloadPdf']);
+
+
         
 
-
-       
+  

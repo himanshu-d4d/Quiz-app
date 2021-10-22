@@ -81,11 +81,19 @@ class QuestionController extends Controller
   }
   public function deleteQuestion($id){
     try{
-         $question = Question::find($id);
-         //dd($question);
-           $question->delete();
-           Alert::success('Delete', 'Question Delete Successfully !!');
-           return redirect('admin/view-question');
+      $questionOrder = Question::find($id);
+      //dd($questionOrder);
+        $questionData = DB::table('questions')
+        ->join('answers', 'answers.question_order','questions.queston_no')
+        ->where('questions.queston_no',$questionOrder['queston_no'])
+        ->delete();
+        dd($questionData);
+        $data = [];
+        foreach($questionData as $key=>$value){
+           $data = $value;
+        }
+        $data->delete();
+          return redirect('admin/view-question');
     }catch(Exception $e){
       echo $e->getMessage();
  } 

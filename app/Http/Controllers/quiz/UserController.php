@@ -44,14 +44,20 @@ class UserController extends Controller
         //    'c_password' => 'required|same:password', 
         // ]);
         try{
+         
              $data = $request->all();
-             //dd($data);
-             $userData = new User;
-             $userData['name'] = $data['name'];
-             $userData['email'] = $data['email'];
-             $userData['password'] = Hash::make($data['name']); 
-             $userData->save();
-             return redirect('user/login'); 
+             if(!User::where('name',$data['name'])->where('email',$data['email'])->first()){
+                //dd($data);
+                $userData = new User;
+                $userData['name'] = $data['name'];
+                $userData['email'] = $data['email'];
+                $userData['password'] = Hash::make($data['name']); 
+                $userData->save();
+                return redirect('user/login')->with('success',"Your account created successfully !");; 
+             }else{
+               return redirect('user/login')->with('error',"Your account already exists: Please login");
+             }
+            
         }catch(Exception $e){
             echo $e->getMessage();
           } 
@@ -94,22 +100,40 @@ class UserController extends Controller
     public function question($id){
         try{
             if (Auth::check()) {
-              
-               $question = DB::table('questions')
-               ->select('categories.cat_first_word','categories.cat_remaining_word','questions.*') 
-               ->join('categories','categories.cat_sequence_no','=','questions.category_order')
-               ->where('categories.cat_sequence_no',$id)
-               ->first();
-               //dd($question);
-               $answers = DB::table('answers')
-               ->select('answers.*')
-               ->join('questions','questions.queston_no','=','answers.question_order')
-               ->where('questions.queston_no',$question->queston_no)
-               ->get();
-               //dd($answers['answers']);
-              return view('quiz-app.pages.question')->with(compact('question','answers'));
+              if($id == 1){
+                $question = DB::table('questions')
+                ->select('categories.cat_first_word','categories.cat_remaining_word','questions.*') 
+                ->join('categories','categories.cat_sequence_no','=','questions.category_order')
+                ->where('categories.cat_sequence_no',$id)
+                ->where('questions.queston_no',1)
+                ->first();
+                //dd($question);
+                $answers = DB::table('answers')
+                ->select('answers.*')
+                ->join('questions','questions.queston_no','=','answers.question_order')
+                ->where('questions.queston_no',$question->queston_no)
+                ->get();
+                //dd($answers['answers']);
+               return view('quiz-app.pages.question')->with(compact('question','answers'));
+              }else{
+                $question = DB::table('questions')
+                ->select('categories.cat_first_word','categories.cat_remaining_word','questions.*') 
+                ->join('categories','categories.cat_sequence_no','=','questions.category_order')
+                ->where('categories.cat_sequence_no',$id)
+                ->first();
+                //dd($question);
+                $answers = DB::table('answers')
+                ->select('answers.*')
+                ->join('questions','questions.queston_no','=','answers.question_order')
+                ->where('questions.queston_no',$question->queston_no)
+                ->get();
+                //dd($answers['answers']);
+               return view('quiz-app.pages.question')->with(compact('question','answers'));
+              }
+               
              
             }
+            return redirect('user/login');
         }catch(Exception $e){
         echo $e->getMessage();
       } 
@@ -137,6 +161,7 @@ class UserController extends Controller
                
                 
             }
+            return redirect('user/login');
              //dd($admin);
         }catch(Exception $e){
         echo $e->getMessage();
@@ -144,6 +169,7 @@ class UserController extends Controller
     }
      public function NextQuestion($id){
         try{
+          if (Auth::check()) {
              $question = DB::table('questions')
     ->select('categories.cat_first_word','categories.cat_remaining_word','questions.*')
     ->join('categories','categories.cat_sequence_no','=','questions.category_order')
@@ -155,15 +181,17 @@ class UserController extends Controller
     ->where('questions.queston_no',$id)
     ->get();
     //dd($answers);
-     return view('quiz-app.pages.question')->with(compact('question','answers'));
-          
+     return view('quiz-app.pages.question')->with(compact('question','answers')); 
+       } 
+       return redirect('user/login');     
         }catch(Exception $e){
         echo $e->getMessage();
       } 
     }
+
     public function nextCategory($id){
         try{
-            //dd($id);
+          if (Auth::check()) {
            if($cat_order = $id +1 ){
             if(Category::where('cat_sequence_no',$cat_order)->first()){
               $category = Category::where('cat_sequence_no',$cat_order)->first();
@@ -174,23 +202,27 @@ class UserController extends Controller
             
            }
            }
+          }
+          return redirect('user/login');
         }catch(Exception $e){
         echo $e->getMessage();
       } 
     }
     public function finish(){
       try{
+        if (Auth::check()) {
           return view('quiz-app.pages.submit');
-          
+        }
+        return redirect('user/login');
       }catch(Exception $e){
       echo $e->getMessage();
     } 
   }
   public function access(Request $request){
     try{
-       // session()->flush();
-      $data = Session::all();
-        dd($data);
+        session()->flush();
+      // $data = Session::all();
+      //    dd($data);
    
      
 
@@ -199,22 +231,26 @@ class UserController extends Controller
   } 
 }
 public function createPDF() {
+  if (Auth::check()) {
   $user = Auth::user();
- // dd($user);
+ $users = User::where('id',$user->id)->first();
+ //dd($users['id']);
   $data = Session::all();
   $allData = $data['total'];
-  $filename = "order_{$user['id']}_{$user['name']}";
+  $filename = time();
+  //dd($filename);
   $path = storage_path('pdf');
       $pdf = PDF::loadView('pdf_view', compact("allData"))->setPaper('a4', 'landscape')->save(''.$path.'/'.$filename.'.pdf');;
      
  /////////////user data save in table////////////////////////////////
            $userData = new Report;
-           $userData['user_name'] = $user['name'];
+           $userData['user_id'] = $users['id'];
+           $userData['user_name'] = $users['name'];
            $userData['pdf'] = $filename;
            $userData['date'] = date("y-m-d");
            $userData->save();
-      session()->flush();
-     // return $pdf->download('pdf_file.pdf');
+           session()->forget('total');
+
      if(!file_exists(''.$path.'/'.$filename.'.pdf')){ // file does not exist
       die('file not found');
   }else {
@@ -227,18 +263,55 @@ public function createPDF() {
     // read the file from disk
     readfile(''.$path.'/'.$filename.'.pdf');
 }
-     //return $pdf->download(''.$filename.'.pdf');
+  }
+  return redirect('user/login');
 }
+  
 public function viewPdf(){
   try{
+    if (Auth::check()) {
     $data = Session::all();
-    if(Session::get('total')){
-      $allData = $data['total'];
-      return view('result')->with(compact('allData'));
+    if(Session::get('total')==0){
+      return redirect('main-section');
     }
-   return redirect('main-section');
+    $allData = $data['total'];
+      return view('result')->with(compact('allData'));
+   
+  }
+  return redirect('user/login');
   }catch(Exception $e){
   echo $e->getMessage();
-  } 
+  }
+ 
+
  }
+    public function reports(){
+      try{
+        if (Auth::check()) {
+          $user = Auth::user();
+          //dd( $user->id);
+          $reports = Report::where('user_id',$user->id)->get();
+          return view('quiz-app.pages.report')->with(compact('reports'));
+        } 
+      }catch(Exception $e){
+  echo $e->getMessage();
+  }
+    }
+    public function downloadPdf($filename){
+      //dd($filename);
+      $path = storage_path('pdf');
+      if(!file_exists(''.$path.'/'.$filename.'.pdf')){
+          die('file not found');
+      }else {
+          header("Cache-Control: public");
+          header("Content-Description: File Transfer");
+          header("Content-Disposition: attachment; filename=$filename");
+          header("Content-Type: application/zip");
+          header("Content-Transfer-Encoding: binary");
+      
+          // read the file from disk
+          readfile(''.$path.'/'.$filename.'.pdf');
+      }
+  }
+ 
 }

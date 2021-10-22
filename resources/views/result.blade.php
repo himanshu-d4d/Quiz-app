@@ -56,7 +56,7 @@
 					    <div class="col-xl-4 col-lg-4 col-sm-6 text-center features-main" style="text-align:center;-ms-flex: 0 0 33.333333%;
     flex: 0 0 33.333333%;
     max-width: 33.333333%;box-sizing: border-box;    margin: 80px 0px;">
-						    <img src="images/icon-home-1.png"/>
+						    <img src="{{url('/images/dummy -pdf.jpeg')}}"/>
 							<p style="    margin: 25px 0 0 0;
     line-height: 36px;
     font-size: 30px;
@@ -65,7 +65,7 @@
 						<div class="col-xl-4 col-lg-4 col-sm-6 text-center features-main" style="text-align:center;-ms-flex: 0 0 33.333333%;
     flex: 0 0 33.333333%;
     max-width: 33.333333%;box-sizing: border-box;    margin: 80px 0px;">
-						    <img src="images/icon-home-2.png"/>
+						    <img src="{{url('/images/dummy -pdf.jpeg')}}"/>
 							<p style="    margin: 25px 0 0 0;
     line-height: 36px;
     font-size: 30px;
@@ -74,7 +74,7 @@
 						<div class="col-xl-4 col-lg-4 col-sm-6 text-center features-main" style="text-align:center;-ms-flex: 0 0 33.333333%;
     flex: 0 0 33.333333%;
     max-width: 33.333333%;box-sizing: border-box;    margin: 80px 0px;">
-						    <img src="images/icon-home-3.png"/>
+						    <img src="{{url('/images/dummy -pdf.jpeg')}}"/>
 							<p style="    margin: 25px 0 0 0;
     line-height: 36px;
     font-size: 30px;
@@ -112,7 +112,7 @@
 				    </div>
 					<div class="down-arrow-down text-center" style="text-align:center;box-sizing: border-box;    cursor: pointer;
     margin-top: 0;">
-					    <a href="#footer-landing"><img src="images/down-arrow.png"/></a>
+					    <a href="#footer-landing"><img src="{{url('/images/dummy -pdf.jpeg')}}"/></a>
 					</div>
 			    </div>
 			</div>
@@ -135,7 +135,7 @@
     flex: 0 0 50%;
     max-width: 50%;padding:0px 15px; box-sizing: border-box;padding-right: 30px;box-sizing: border-box;">
 							<div class="inner-tecnology" style="box-sizing: border-box;">
-								<img src="images/imgr1.jpg" style="vertical-align: middle;
+								<img src="{{url('/images/dummy -pdf.jpeg')}}" style="vertical-align: middle;
     border-style: none;    width: 100%;"/>
 								<div class="inner-tecnology-bottom" style="box-sizing: border-box;background: #e0873a;
     padding: 60px 15px;
@@ -151,7 +151,7 @@
     flex: 0 0 50%;
     max-width: 50%;padding:0px 15px;box-sizing: border-box;padding-left: 30px;box-sizing: border-box;">
 							<div class="inner-tecnology" style="box-sizing: border-box;">
-								<img src="images/imgr2.jpg" style="vertical-align: middle;
+								<img src="{{url('/images/dummy -pdf.jpeg')}}" style="vertical-align: middle;
     border-style: none;width: 100%;"/>
 								<div class="inner-tecnology-bottom" style="box-sizing: border-box;    background: #135153;
     padding: 60px 15px;
@@ -170,7 +170,7 @@
     box-sizing: border-box;
     cursor: pointer;
     margin-top:25px;">
-					    <a href="#footer-landing"><img src="images/down-arrow.png"/></a>
+					    <a href="#footer-landing"><img src="{{url('/images/dummy -pdf.jpeg')}}"/></a>
 					</div>
 			<div class="selectyour-tect useful-infsd" style="box-sizing: border-box;    padding: 40px 0px 80px;">
 				<div class="container" style="max-width: 1024px;width:100%;padding-right:15px;padding-left: 15px;margin-right:auto;margin-left: auto;box-sizing: border-box;">
@@ -192,7 +192,7 @@
     flex: 0 0 50%;
     max-width: 50%;padding:0px 15px;box-sizing: border-box;padding-right: 30px;box-sizing: border-box;">
 							<div class="inner-tecnology" style="box-sizing: border-box;">
-								<img src="images/imgr3.jpg" style="vertical-align: middle;
+								<img src="{{url('/images/dummy -pdf.jpeg')}}" style="vertical-align: middle;
     border-style: none;    width: 100%;"/>
 								<div class="inner-tecnology-bottom" style="box-sizing: border-box;
     background: #e0873a;
@@ -209,7 +209,7 @@
     flex: 0 0 50%;
     max-width: 50%;padding:0px 15px;box-sizing: border-box;padding-left: 30px;box-sizing: border-box;">
 							<div class="inner-tecnology" style="box-sizing: border-box;">
-								<img src="images/imgr4.jpg" style="vertical-align: middle;
+								<img src="{{url('/images/dummy -pdf.jpeg')}}" style="vertical-align: middle;
     border-style: none;    width: 100%;"/>
 								<div class="inner-tecnology-bottom" style="box-sizing: border-box;
     background: #135153;
@@ -246,7 +246,7 @@
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;box-sizing: border-box;">
-						    <img src="images/footer-logo.png"/>
+						    <img src="{{url('/images/dummy -pdf.jpeg')}}"/>
 						</div>
 				    </div>
 				</div>

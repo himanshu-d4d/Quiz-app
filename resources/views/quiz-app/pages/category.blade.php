@@ -26,6 +26,9 @@
 						  <a class="nav-link" href="#">Back to website</a>
 						</li>
 						<li class="nav-item">
+						  <a class="nav-link" href="{{url('user/report')}}">Reports</a>
+						</li>
+						<li class="nav-item">
 						  <a class="nav-link" href="{{url('logout')}}">Logout</a>
 						</li>
 						<li class="nav-item">

@@ -24,17 +24,25 @@
 						    <h1><span>Who are</span> you?</h1>
 							<p>Please complete your details here <br> so that we can send you a <br> personalised report. We won’t be <br> using the information for any <br> other purpose unless you allow <br> us to do so.</p>
 				        </div>
-						@if(session('error'))
+						<div class="col-sm-6">
+						    <form action ="{{url('user/login-attempt')}}" method ="POST">
+							   @csrf
+							   @if(session('error'))
                         <div class="alert alert-sm alert-danger alert-block" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                         <strong>{{ session('error') }}</strong>
                         </div>
-                 @endif
-						<div class="col-sm-6">
-						    <form action ="{{url('user/login-attempt')}}" method ="POST">
-							   @csrf
+                        @endif
+						@if(session('success'))
+                        <div class="alert alert-sm alert-success alert-block" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>{{ session('success') }}</strong>
+                        </div>
+                        @endif
 								  <div class="form-group">
 									<label for="name">First Name</label>
 									<input type="text" class="form-control" id="firstname" name="name"/>
