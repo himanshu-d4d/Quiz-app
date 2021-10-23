@@ -26,7 +26,7 @@ class AnswerController extends Controller
     public function storeAnswer(Request $request){
         try{
             $data = $request->all();
-           //dd($data);
+           //dd($data['question_id']);
             
             // $answers =[];
         foreach($data['answers'] as $x=>$val){
@@ -38,7 +38,7 @@ class AnswerController extends Controller
             //dd($answers);
             $result = Answer::Create($answers);
              }
-             return redirect("admin/view-answers/".$request->question);
+             return redirect("admin/view-answers/".$data['question_id']);
         }catch(Exception $e){
             echo $e->getMessage();
           } 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin\Category;
+use App\Models\admin\Question;
 use RealRashid\SweetAlert\Facades\Alert;
 use Exception;
 use File;
@@ -43,7 +44,7 @@ class CategoryController extends Controller
     }
     public function viewCategory(){
       try{
-          $categories = Category::paginate('10');
+          $categories = Category::orderBy("cat_sequence_no")->paginate('10');
            return view('admin.category.view_category')->with(compact('categories'));
       }catch(Exception $e){
           return redirect('admin.dashboard')->with('error',$e->getMessage());
@@ -91,13 +92,17 @@ class CategoryController extends Controller
     public function deleteCategory($id){
        try{
            $category = Category::find($id);
-           //dd($category);
-           if($category['bg_image']){
-            File::delete(public_path("upload/images/$category[bg_image]"));
-           }
-           $category->delete();
-           Alert::success('Deleted', 'Category Delete Successfully !!');
-           return redirect('admin/view-category');
+          $question = Question::where('category_order', $category['cat_sequence_no'])->count();
+          //dd($question);
+          if($question == 0){
+            if($category['bg_image']){
+              File::delete(public_path("upload/images/$category[bg_image]"));
+             }
+             $category->delete();
+             Alert::success('Deleted', 'Category Delete Successfully !!');
+             return redirect('admin/view-category');
+          }
+          return redirect('admin/view-category')->with('error', "Please delete the Question related to this first");
        }catch(Exception $e){
         echo $e->getMessage();
       } 

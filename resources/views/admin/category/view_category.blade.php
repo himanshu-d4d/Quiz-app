@@ -5,6 +5,14 @@
 
 <!-- Default box -->
 <div class="card">
+@if(session('error'))
+                        <div class="alert alert-sm alert-danger alert-block" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>{{ session('error') }}</strong>
+                        </div>
+                        @endif
   <div class="card-header">
     <h3 class="card-title">Category List</h3>
     <div class="card-tools">
@@ -41,7 +49,7 @@
             <tr>
             
                 <td>
-               {{$category->id}}
+               {{$category->cat_sequence_no}}
                 </td>
                 <td>
                 {{$category->cat_first_word}} <spam>{{$category->cat_remaining_word}}</spam>

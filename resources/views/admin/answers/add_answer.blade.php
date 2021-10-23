@@ -39,6 +39,7 @@
             <div class="card-body">
               <div class="form-group">
                 <label for="inputName">Question</label>
+                <input type="hidden" value = "{{$question->id}}" name="question_id">
                 <select name="question" class="form-control">
                       <option value="{{$question->queston_no}}">{{$question->question}}</option>  
                 </select>

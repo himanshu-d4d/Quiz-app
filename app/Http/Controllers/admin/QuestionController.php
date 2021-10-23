@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin\Category;
 use App\Models\admin\Question;
+use App\Models\admin\Answer;
 use RealRashid\SweetAlert\Facades\Alert;
 use Exception;
 use DB;
+
 
 class QuestionController extends Controller
 {
@@ -46,7 +48,9 @@ class QuestionController extends Controller
             $questionData = DB::table('questions')
             ->select('categories.cat_first_word','categories.cat_remaining_word','questions.*')
             ->join('categories', 'categories.cat_sequence_no','=','questions.category_order')
+            ->orderBy("queston_no")
             ->paginate('10');
+            
             //dd($questionData);
             return view('admin.question.question_list')->with(compact('questionData'));
          }catch(Exception $e){
@@ -81,19 +85,15 @@ class QuestionController extends Controller
   }
   public function deleteQuestion($id){
     try{
-      $questionOrder = Question::find($id);
+      $question = Question::find($id);
       //dd($questionOrder);
-        $questionData = DB::table('questions')
-        ->join('answers', 'answers.question_order','questions.queston_no')
-        ->where('questions.queston_no',$questionOrder['queston_no'])
-        ->delete();
-        dd($questionData);
-        $data = [];
-        foreach($questionData as $key=>$value){
-           $data = $value;
-        }
-        $data->delete();
-          return redirect('admin/view-question');
+       $answers = Answer::where('question_order',$question['queston_no'])->count();
+       if($answers == 0){
+         $question->delete();
+         Alert::success('Deleted', 'Question delete Successfully !!');
+         return redirect('admin/view-question');
+       }
+          return redirect('admin/view-question')->with("error","Please delete the answer related to this first");
     }catch(Exception $e){
       echo $e->getMessage();
  } 

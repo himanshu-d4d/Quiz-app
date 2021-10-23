@@ -116,12 +116,16 @@ class UserController extends Controller
                 //dd($answers['answers']);
                return view('quiz-app.pages.question')->with(compact('question','answers'));
               }else{
+                $questionData = Question::where('category_order',$id)->select('queston_no')->get();
+                 $question_order = array_merge($questionData->toArray());
+                //dd($question_order);
                 $question = DB::table('questions')
                 ->select('categories.cat_first_word','categories.cat_remaining_word','questions.*') 
                 ->join('categories','categories.cat_sequence_no','=','questions.category_order')
                 ->where('categories.cat_sequence_no',$id)
+                ->where(min($question_order))
                 ->first();
-                //dd($question);
+               
                 $answers = DB::table('answers')
                 ->select('answers.*')
                 ->join('questions','questions.queston_no','=','answers.question_order')
@@ -218,18 +222,18 @@ class UserController extends Controller
       echo $e->getMessage();
     } 
   }
-  public function access(Request $request){
-    try{
-        session()->flush();
-      // $data = Session::all();
-      //    dd($data);
+//   public function access(Request $request){
+//     try{
+//         session()->flush();
+//       // $data = Session::all();
+//       //    dd($data);
    
      
 
-    }catch(Exception $e){
-    echo $e->getMessage();
-  } 
-}
+//     }catch(Exception $e){
+//     echo $e->getMessage();
+//   } 
+// }
 public function createPDF() {
   if (Auth::check()) {
   $user = Auth::user();

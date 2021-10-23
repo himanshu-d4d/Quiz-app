@@ -146,7 +146,7 @@
           </li>
           <li class="nav-item {{ (request()->is('admin/view-report*') || request()->is('admin/expired-events-list*')) ? 'nav-item menu-is-opening menu-open' : 'nav-item'}}">
             <a href="#" class="nav-link">
-              <i class="nav-icon fa fa-plus"></i>
+              <i class="nav-icon fa fa-file"></i>
               <p>
                 Reports
                 <i class="right fas fa-angle-left"></i>

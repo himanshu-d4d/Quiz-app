@@ -98,7 +98,7 @@ Route::group(['middleware' => 'auth:admin'], function(){
         Route::get('next-question/{id}', [UserController::class, 'NextQuestion']);
         Route::get('next-category/{id}', [UserController::class, 'nextCategory']);
         Route::get('finish', [UserController::class, 'finish']);
-        Route::get('access', [UserController::class, 'access']);
+        //Route::get('access', [UserController::class, 'access']);
         Route::get('result', [UserController::class, 'viewPdf']);
         Route::get('result/pdf', [UserController::class, 'createPDF']);
         Route::get('user/report', [UserController::class, 'reports']);
