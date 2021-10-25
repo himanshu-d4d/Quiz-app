@@ -99,7 +99,7 @@ Route::group(['middleware' => 'auth:admin'], function(){
         Route::get('next-category/{id}', [UserController::class, 'nextCategory']);
         Route::get('finish', [UserController::class, 'finish']);
         //Route::get('access', [UserController::class, 'access']);
-        Route::get('result', [UserController::class, 'viewPdf']);
+        Route::get('thank-you', [UserController::class, 'viewPdf']);
         Route::get('result/pdf', [UserController::class, 'createPDF']);
         Route::get('user/report', [UserController::class, 'reports']);
         Route::get('user/download-pdf/{filename}', [UserController::class, 'downloadPdf']);

@@ -9,13 +9,13 @@ use App\Models\admin\Category;
 use App\Models\admin\Question;
 use App\Models\admin\Snippet;
 use App\Models\admin\Report;
-
+use Storage;
 use DB;
 use Session;
 use Redirect;
 use PDF;
 use File;
-
+use Mail;
 
 
 use Hash;
@@ -65,13 +65,14 @@ class UserController extends Controller
     public function loginAttempt(Request $request){
         try{
             $data = $request->all();
+            //dd($data);
             if($authData=User::where('name',$data['name'])->where('email',$data['email'])->first()){
                 //dd($authData);
                 Auth::login($authData);
                 return redirect('main-section');
                
             }
-            return redirect('user/login');
+            return redirect('user/login')->with('error',"please enter correct email or password");
         }catch(Exception $e){
             echo $e->getMessage();
           } 
@@ -244,7 +245,7 @@ public function createPDF() {
            $userData['date'] = date("y-m-d");
            $userData->save();
            session()->forget('total');
-
+          
      if(!file_exists(''.$path.'/'.$filename.'.pdf')){ // file does not exist
       die('file not found');
   }else {
@@ -256,7 +257,7 @@ public function createPDF() {
 
     // read the file from disk
     return $pdf->download(''.$filename.'.pdf');
-
+   
     //readfile(''.$path.'/'.$filename.'.pdf');
 }
   }
@@ -265,14 +266,22 @@ public function createPDF() {
   
 public function viewPdf(){
   try{
+    set_time_limit(0);
+    $user = loginUser()->email;
+    //dd($userData['to']);
     if (Auth::check()) {
     $data = Session::all();
     if(Session::get('total')==0){
-      return redirect('main-section');
+      return redirect('user/login');
     }
     $allData = $data['total'];
-      return view('result')->with(compact('allData'));
-   
+    $pdf = PDF::loadView('pdf_view', compact("allData"));
+    Mail::send('mail',$allData,function($messages) use($user,$pdf){
+      $messages->to($user)
+      ->attachData($pdf->output(), "invoice.pdf");
+     });
+      return view('quiz-app.pages.thanku')->with(compact('allData'));
+      
   }
   return redirect('user/login');
   }catch(Exception $e){
@@ -299,14 +308,13 @@ public function viewPdf(){
       if(!file_exists(''.$path.'/'.$filename.'.pdf')){
           die('file not found');
       }else {
-          header("Cache-Control: public");
-          header("Content-Description: File Transfer");
-          header("Content-Disposition: attachment; filename=$filename");
-          header("Content-Type: application/zip");
-          header("Content-Transfer-Encoding: binary");
-      
-          // read the file from disk
-          readfile(''.$path.'/'.$filename.'.pdf');
+        //Storage::download(''.$path.'/'.$filename.'.pdf');
+
+        return response()->download(''.$path.'/'.$filename.'.pdf');
+        //return Storage::download(''.$path.'/'.$filename.'.pdf');
+
+
+          //return $pdf->download(''.$filename.'.pdf');
       }
   }
  

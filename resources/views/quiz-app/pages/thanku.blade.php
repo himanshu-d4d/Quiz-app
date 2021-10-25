@@ -19,29 +19,27 @@
 	</head>
 	<body>
         <section class="projection-section-main submit-main" style="background-color: #f3f5ff;">
-		    <div class="project-setion-inner same-para-class">
-			    <div class="container">
-				    <div class="row">
-					    <div class="col-sm-6">
-						    <h1><span>Next </span> steps</h1>
-							<p>Please complete your details to <br> receive a personalised report. We <br> won’t be using the information <br> for any other purpose unless you <br> allow  us to do so.</p>
-				        </div>
-						<div class="col-sm-6">
-						    <form action = "{{url('thank-you')}}">
-								  <div class="form-group">
-									<label for="name">First Name</label>
-									<input type="text" class="form-control" id="firstname"/>
-								  </div>
-								  <div class="form-group">
-									<label for="exampleInputPassword1">Email address</label>
-									<input type="email" class="form-control" id="email"/>
-								  </div>
-								  <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-				        </div>
-				    </div>
+		   
+<div class="project-setion-inner same-para-class">
+	
+		<div class="container">
+		    
+				<div class="row">
+					<div class="col-sm-12">
+					<div class="thanks-page-inner">
+						
+						<h1>Traceability Chooser</h1>
+						<div class="thanks-inner-div">
+							<span class="thanks-logo"><i class="fa fa-check"></i> Thanks</span>
+							<p>You have completed the Traceability Systems Chooser and will shortly receive a tailored report to your inbox as well as a shopping list to help you discuss your options with technology providers.  Additional resources are available at <br> <a href="www.traceabilitychooser.com.au">www.traceabilitychooser.com.au</a> and <a href="www.myfoodbusiness.com.au">www.myfoodbusiness.com.au</a></p>
+							<a href="{{url('user/login')}}" class="btn">Submit another response</a>
+						</div>
+					</div>
+				
 				</div>
 			</div>
+		</div>
+	</div>
 		</section>
 	</body>
 </html>

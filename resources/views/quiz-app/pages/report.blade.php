@@ -1,69 +1,74 @@
+<!doctype html>
 <html>
-<head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
-<style>
-.navbar {
-    width:500px;
-    display:table;
-    li{
-        display:table-cell;
-        text-align:center;
-    }
-}
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="description" content="one page scrolling for websites">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Traceability</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="{{url('frontend/css/easy-responsive-tabs.css')}}" rel="stylesheet" type="text/css">
+		<link href="{{url('frontend/css/owl.carousel.min.css')}}" rel="stylesheet" type="text/css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+		<link href="{{url('frontend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
+		<link href="{{url('frontend/css/style.css')}}" rel="stylesheet" type="text/css">
+		<link href="{{url('frontend/css/responsive.css')}}" rel="stylesheet" type="text/css">
+	</head>
+	<body>
 
-#customers {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
+  <section class="projection-section-main category-one " style="background-color: #f3f5ff;">
 
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
+		    <header >
+				<nav class="navbar navbar-expand-sm" >
+					  <ul class="navbar-nav" >
+						<li class="nav-item">
+						  <a class="nav-link" href="{{url('main-section')}}" style ="color: #c1c1c1;">Back to website</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" href="{{url('user/report')}}" style ="color: #c1c1c1;">Reports</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" href="{{url('logout')}}" style ="color: #c1c1c1;">Logout</a>
+						</li>
+						<li class="nav-item">
+						  <a class="nav-link" href="#" style ="color: #c1c1c1;"><img src="{{url('frontend/images/login.png')}}"/>{{loginUser()->name}}</a>
+						</li>
+					  </ul>
+				</nav>
+			</header>
+      <div class="container">
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
-
-#customers tr:hover {background-color: #ddd;}
-
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
-}
-</style>
-</head>
-<body>
-<div class="form-inline">
-<h1>Traceability Chooser Report List</h1>
-<td> <a href="{{url('main-section')}}" class="btn btn-success btn-sm" style='margin-left:40%;'>Back to website</a></td>
-
-</div>
-
-
-<table id="customers">
-  <tr>
+      <h1>Traceability Chooser</h1>
+      <table class="table table-striped">
+  <thead>
+    <tr>
     <th style ="text-align:center;">Sr. no.</th>
     <th style ="text-align:center;">Date</th>
     <th style ="text-align:center;">Action</th>
-  </tr>
-  <?php $i=0 ?>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <?php $i=0 ?>
   @foreach($reports as $report)
   <?php $i++ ?>
   <tr>
     <td style ="text-align:center;"><?php echo $i ?></td>
     <td style ="text-align:center;">{{$report->date}}</td>
-    <td style ="text-align:center;"> <a href="{{url('/user/download-pdf/'.$report->pdf)}}" class="btn btn-success btn-sm" >View Report</a></td>
+    <td style ="text-align:center;"> <a href="{{url('/user/download-pdf/'.$report->pdf)}}"  >View Report</a></td>
   </tr>
 @endforeach
-
-
+    </tr>
+  </tbody>
 </table>
+</div>
 
-</body>
+		</section>
+	</body>
 </html>
+
 
 
 
