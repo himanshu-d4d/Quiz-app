@@ -32,7 +32,7 @@
 						  <a class="nav-link" href="{{url('logout')}}">Logout</a>
 						</li>
 						<li class="nav-item">
-						  <a class="nav-link" href="#"><img src="{{url('frontend/images/login.png')}}"/>Helen Johnston</a>
+						  <a class="nav-link" href="#"><img src="{{url('frontend/images/login.png')}}"/>{{loginUser()->name}}</a>
 						</li>
 					  </ul>
 				</nav>

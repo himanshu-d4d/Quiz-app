@@ -49,8 +49,8 @@
               </div>
               <div class="row">
                 <div class="col-7">
-                <a href="#" class="btn btn-secondary" style ="margin-left:45%">Cancel</a>
-                <input type="submit" value="Save Changes" class="btn btn-success float-right">                
+                <a href="#" class="btn btn-secondary" >Cancel</a>
+                <input type="submit" value="Save Changes" class="btn btn-success ">                
 
                 </div>
             </div>

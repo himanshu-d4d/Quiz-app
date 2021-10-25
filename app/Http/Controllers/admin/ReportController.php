@@ -9,7 +9,7 @@ use App\Models\admin\Report;
 class ReportController extends Controller
 {
     public function report(){
-        $reports = Report::paginate(5);
+        $reports = Report::orderBy('id')->paginate(10);
         //dd($reports);
         return view('admin.report.report')->with(compact('reports'));
     }

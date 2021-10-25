@@ -65,9 +65,12 @@
             @endif
         </tbody>
     </table>
+
   </div>
   <!-- /.card-body -->
 </div>
+<a href="{{url('admin/dashboard')}}" class="btn btn-success btn-sm" style ="float:left;" >Back to home</i></a>
+
 <!-- /.card -->
 </section>
 {{$answers->links("pagination::bootstrap-4")}}

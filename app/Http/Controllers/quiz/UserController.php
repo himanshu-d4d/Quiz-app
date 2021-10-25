@@ -222,19 +222,9 @@ class UserController extends Controller
       echo $e->getMessage();
     } 
   }
-//   public function access(Request $request){
-//     try{
-//         session()->flush();
-//       // $data = Session::all();
-//       //    dd($data);
-   
-     
 
-//     }catch(Exception $e){
-//     echo $e->getMessage();
-//   } 
-// }
 public function createPDF() {
+  set_time_limit(0);
   if (Auth::check()) {
   $user = Auth::user();
  $users = User::where('id',$user->id)->first();
@@ -258,14 +248,16 @@ public function createPDF() {
      if(!file_exists(''.$path.'/'.$filename.'.pdf')){ // file does not exist
       die('file not found');
   }else {
-    header("Cache-Control: public");
-    header("Content-Description: File Transfer");
-    header("Content-Disposition: attachment; filename=$filename");
-    header("Content-Type: application/zip");
-    header("Content-Transfer-Encoding: binary");
+    
+    // header("Cache-Control: public");
+    // header("Content-Description: File Transfer");
+    // header("Content-Disposition: attachment; filename=$filename");
+    // header("Content-Transfer-Encoding: binary");
 
     // read the file from disk
-    readfile(''.$path.'/'.$filename.'.pdf');
+    return $pdf->download(''.$filename.'.pdf');
+
+    //readfile(''.$path.'/'.$filename.'.pdf');
 }
   }
   return redirect('user/login');

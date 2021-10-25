@@ -1,9 +1,11 @@
 @extends('admin.layouts.master')
 @section('content')
 <div class="content-wrapper">
+    
 <section class="content">
 
 <!-- Default box -->
+
 <div class="card">
   <div class="card-header">
     <h3 class="card-title">Category List</h3>
@@ -62,6 +64,7 @@
   </div>
   <!-- /.card-body -->
 </div>
+
 <!-- /.card -->
 </section>
 {{$reports->links("pagination::bootstrap-4")}}
