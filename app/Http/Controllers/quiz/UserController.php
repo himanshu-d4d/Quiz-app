@@ -224,62 +224,58 @@ class UserController extends Controller
     } 
   }
 
-public function createPDF() {
-  set_time_limit(0);
-  if (Auth::check()) {
-  $user = Auth::user();
- $users = User::where('id',$user->id)->first();
- //dd($users['id']);
-  $data = Session::all();
-  $allData = $data['total'];
-  $filename = time();
-  //dd($filename);
-  $path = storage_path('pdf');
-      $pdf = PDF::loadView('pdf_view', compact("allData"))->setPaper('a4', 'landscape')->save(''.$path.'/'.$filename.'.pdf');;
+// public function createPDF() {
+//   set_time_limit(0);
+//   if (Auth::check()) {
+//   $user = Auth::user();
+//  $users = User::where('id',$user->id)->first();
+//  //dd($users['id']);
+//   $data = Session::all();
+//   $allData = $data['total'];
+//   $filename = time();
+//   //dd($filename);
+//   $path = storage_path('pdf');
+//       $pdf = PDF::loadView('pdf_view', compact("allData"))->setPaper('a4', 'landscape')->save(''.$path.'/'.$filename.'.pdf');
      
- /////////////user data save in table////////////////////////////////
-           $userData = new Report;
-           $userData['user_id'] = $users['id'];
-           $userData['user_name'] = $users['name'];
-           $userData['pdf'] = $filename;
-           $userData['date'] = date("y-m-d");
-           $userData->save();
-           session()->forget('total');
-          
-     if(!file_exists(''.$path.'/'.$filename.'.pdf')){ // file does not exist
-      die('file not found');
-  }else {
-    
-    // header("Cache-Control: public");
-    // header("Content-Description: File Transfer");
-    // header("Content-Disposition: attachment; filename=$filename");
-    // header("Content-Transfer-Encoding: binary");
-
-    // read the file from disk
-    return $pdf->download(''.$filename.'.pdf');
-   
-    //readfile(''.$path.'/'.$filename.'.pdf');
-}
-  }
-  return redirect('user/login');
-}
+//  /////////////user data save in table////////////////////////////////
+//            $userData = new Report;
+//            $userData['user_id'] = $users['id'];
+//            $userData['user_name'] = $users['name'];
+//            $userData['pdf'] = $filename;
+//            $userData['date'] = date("y-m-d");
+//            $userData->save();
+//            session()->forget('total');         
+//            return redirect('user/login');
+//   }
+//   return redirect('user/login');
+// }
   
 public function viewPdf(){
   try{
     set_time_limit(0);
-    $user = loginUser()->email;
-    //dd($userData['to']);
+    $user = loginUser();
+    //dd($user->email);
     if (Auth::check()) {
     $data = Session::all();
     if(Session::get('total')==0){
       return redirect('user/login');
     }
+    $filename = time();
+    $path = storage_path('pdf');
     $allData = $data['total'];
-    $pdf = PDF::loadView('pdf_view', compact("allData"));
-    Mail::send('mail',$allData,function($messages) use($user,$pdf){
-      $messages->to($user)
-      ->attachData($pdf->output(), "invoice.pdf");
+    $pdf = PDF::loadView('pdf_view', compact("allData"))->setPaper('a4', 'landscape')->save(''.$path.'/'.$filename.'.pdf');  
+    Mail::send('mail',$allData,function($messages) use($user,$pdf,$filename){
+      $messages->to($user->email)
+      ->subject("Traceability Chooser")
+      ->attachData($pdf->output(),$filename.'.pdf');
      });
+     $userData = new Report;
+     $userData['user_id'] = $user->id;
+     $userData['user_name'] = $user->name;
+     $userData['pdf'] = $filename;
+     $userData['date'] = date("y-m-d");
+     $userData->save();
+     session()->forget('total');      
       return view('quiz-app.pages.thanku')->with(compact('allData'));
       
   }
