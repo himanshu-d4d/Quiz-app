@@ -84,7 +84,7 @@
 	                    
 						 <div class="col-sm-12 features-text" style="-ms-flex: 0 0 100%;flex: 0 0 100%;max-width: 100%;box-sizing: border-box;padding:0px 15px;box-sizing: border-box;">
                          <?php $category = []; ?>
-                         @foreach ($allData as $data=>$value)
+                         @foreach ($allData as $value)
 						    <h3 style="    color: #135153;
                             
     margin-bottom: 10px;
@@ -92,12 +92,12 @@
     
     margin-top: 0;">
     
-    <?php if(in_array($value[7],$category)){
+    <?php if(in_array($value['category'],$category)){
          
     }else{ ?>
-        <strong>{{$value[7]}}</strong></h3> 
+        <strong>{{$value['category']}}</strong></h3> 
    <?php 
-   array_push($category,$value[7]);
+   array_push($category,$value['category']);
 } ?>
   
    
@@ -105,7 +105,7 @@
     margin-top: 0;
     line-height: 50px;
     font-size: 30px;
-    color: #135153;">{{ $value[5]}}</p>
+    color: #135153;">{{ $value["snippets_text"]}}</p>
     @endforeach
  				        </div>
 				    </div>
@@ -127,8 +127,13 @@
     margin-top: 0;
     line-height: 50px;
     font-size: 30px;">Now you can assess the available technology and we have provided a selection of questions to ask a tech provider to make the right decision</p>
+	           <?php $data =  answerscore(); ?>
+	                   @foreach($data as $value)
+	                    <p> {{$value['color_list']}}</p>
+						@endforeach
 						</div>
 					</div>
+					
 					<div class="row" style="display: -ms-flexbox;display: flex;-ms-flex-wrap: wrap;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;box-sizing: border-box;">
 						<div class="col-sm-6" style="-ms-flex: 0 0 50%;
     flex: 0 0 50%;

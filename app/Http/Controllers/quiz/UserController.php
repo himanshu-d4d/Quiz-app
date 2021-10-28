@@ -147,14 +147,15 @@ class UserController extends Controller
         try{
             if (Auth::check()) {
                 $data = $request->all();
+               //dd($data);
                 $answers = str_replace(["\r\n", "\n", "\r",], "", $data['answer']);
                 $questions = str_replace(["\r\n", "\n", "\r",], "", $data['question']);
                 //dd($content);
                  $snippets = Snippet::where('snippets_no',$data['snippets_no'])->select('snippets_text')->first();
                 // dd($snippets['snippets_text']);
-                Session::push('total',['answer',$answers,'answer_type',$data['answer_type'],'snippets_text',$snippets['snippets_text'],
-                'category',$data['category_name'],'question',$questions]);
-                $returnData = ["question_no"=>$data['question_no']];
+                Session::push('total',['answer'=>$answers,'answer_type'=>$data['answer_type'],'snippets_text'=>$snippets['snippets_text'],
+                'category'=>$data['category_name'],'question'=>$questions,'question_no'=>$data['question_no'],'answer_order'=>$data['answer_order']],);
+                //$returnData = ["question_no"=>$data['question_no']];
                if($question_no = $data['question_no'] + 1){
                  if(Question::where('queston_no',$question_no)->where('category_order',$data['category_order'])->first()){
                   return redirect('next-question/'.$question_no);
@@ -257,6 +258,7 @@ public function viewPdf(){
     //dd($user->email);
     if (Auth::check()) {
     $data = Session::all();
+    //$this-> answerscore($data);
     if(Session::get('total')==0){
       return redirect('user/login');
     }
@@ -265,7 +267,7 @@ public function viewPdf(){
     $allData = $data['total'];
     $pdf = PDF::loadView('pdf_view', compact("allData"))->setPaper('a4', 'landscape')->save(''.$path.'/'.$filename.'.pdf');  
     Mail::send('mail',$allData,function($messages) use($user,$pdf,$filename){
-      $messages->to($user->email)
+      $messages->to("himanshu.d4d@gmail.com")
       ->subject("Traceability Chooser")
       ->attachData($pdf->output(),$filename.'.pdf');
      });
@@ -275,7 +277,8 @@ public function viewPdf(){
      $userData['pdf'] = $filename;
      $userData['date'] = date("y-m-d");
      $userData->save();
-     session()->forget('total');      
+     session()->forget('total'); 
+     session()->forget('answerScoreList');           
       return view('quiz-app.pages.thanku')->with(compact('allData'));
       
   }
@@ -313,5 +316,11 @@ public function viewPdf(){
           //return $pdf->download(''.$filename.'.pdf');
       }
   }
- 
+//  public function access(Request $request){
+//      $all=$request->session()->all();
+//      dd($all);
+//  //$request->session()->flash('answerScoreList');
+
+//  }
+   
 }

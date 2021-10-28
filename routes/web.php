@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\SnippetsController;
 use App\Http\Controllers\admin\AnswerController;
 use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\quiz\UserController;
+use App\Http\Controllers\quiz\EditpdfController;
 
 
 
@@ -98,12 +99,14 @@ Route::group(['middleware' => 'auth:admin'], function(){
         Route::get('next-question/{id}', [UserController::class, 'NextQuestion']);
         Route::get('next-category/{id}', [UserController::class, 'nextCategory']);
         Route::get('finish', [UserController::class, 'finish']);
-        //Route::get('access', [UserController::class, 'access']);
+        Route::get('access', [UserController::class, 'access']);
         Route::get('thank-you', [UserController::class, 'viewPdf']);
         //Route::get('result/pdf', [UserController::class, 'createPDF']);
         Route::get('user/report', [UserController::class, 'reports']);
         Route::get('user/download-pdf/{filename}', [UserController::class, 'downloadPdf']);
 
+
+        
 
         
 

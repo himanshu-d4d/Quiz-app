@@ -48,7 +48,8 @@
                             @csrf
 							@if($question->answer_type == "redio")
                             <input type="hidden" name="snippets_no" id="snippets_no">
-							<input type="hidden" name="question" value="{{$question->question}}"> 
+							<input type="hidden" name="answer_order" id="answer_no">
+							<input type="hidden" name="question" value="{{$question->question}}">
 							<input type="hidden" name="answer_type" value="{{$question->answer_type}}"> 
 							<input type="hidden" name="category_name" value="{{$question->cat_first_word}} {{$question->cat_remaining_word}}">
                             <input type="hidden" name="category_order" value="{{$question->category_order}}">
@@ -57,7 +58,7 @@
 							<div class="question-radio">
                               @foreach($answers as $answer)
 							    <label class="main-radio">{{$answer->answers}}
-									  <input type="radio"  name="answer" class="snippets" value ="{{$answer->answers}}" snippet-no="{{$answer->snippets_no}}" required>
+									  <input type="radio"  name="answer" class="snippets" value ="{{$answer->answers}}" snippet-no="{{$answer->snippets_no}}" answer-no="{{$answer->answer_order}}" required>
 									  <span class="checkmark"></span>
 								</label>
                                 @endforeach
@@ -65,11 +66,13 @@
 							   @else
 							   <div class="project-setion-inner same-category-image-new">
 							   <input type="hidden" name="snippets_no" id="snippets_no">
+							   <input type="hidden" name="answer_order" id="answer_no">
 							<input type="hidden" name="question" value="{{$question->question}}"> 
 							<input type="hidden" name="answer_type" value="{{$question->answer_type}}"> 
 							<input type="hidden" name="category_name" value="{{$question->cat_first_word}} {{$question->cat_remaining_word}}">
                             <input type="hidden" name="category_order" value="{{$question->category_order}}">
                             <input type="hidden" name="question_no" value="{{$question->queston_no}}">
+
 			    <div class="container">
 				    <div class="row">
 					    <div class="col-sm-12">
@@ -88,15 +91,15 @@
 								  @foreach($answers as $answer)
 									<td>{{$answer->answers}}</td>
 									<td><label class="main-radio">
-									  <input type="radio"   name="{{'answer['.$answer->id.']'}}" class="snippets" value ="{{$answer->answers}} = Not important" snippet-no="{{$answer->snippets_no}}"required>
+									  <input type="radio"   name="{{'answer['.$answer->id.']'}}" class="snippets" value ="{{$answer->answers}} = Not important" snippet-no="{{$answer->snippets_no}}" answer-no="{{$answer->answer_order}}" required>
 									  <span class="checkmark"></span>
 								</label></td>
 									<td><label class="main-radio">
-									  <input type="radio"   name="{{'answer['.$answer->id.']'}}" class="snippets" value ="{{$answer->answers}} = Unsure" snippet-no="{{$answer->snippets_no}}" required>
+									  <input type="radio"   name="{{'answer['.$answer->id.']'}}" class="snippets" value ="{{$answer->answers}} = Unsure" snippet-no="{{$answer->snippets_no}}" answer-no="{{$answer->answer_order}}" required>
 									  <span class="checkmark"></span>
 								</label></td>
 								<td><label class="main-radio">
-									  <input type="radio"   name="{{'answer['.$answer->id.']'}}" class="snippets" value ="{{$answer->answers}} = Important" snippet-no="{{$answer->snippets_no}}" required>
+									  <input type="radio"   name="{{'answer['.$answer->id.']'}}" class="snippets" value ="{{$answer->answers}} = Important" snippet-no="{{$answer->snippets_no}}" answer-no="{{$answer->answer_order}}" required>
 									  <span class="checkmark"></span>
 								</label></td>
 								  </tr>
@@ -129,6 +132,11 @@
              var data = $(this).attr("snippet-no");
              $("#snippets_no").val(data);
            });
+             
+           });
+		   $('.snippets').click( function() {
+             var data = $(this).attr("answer-no");
+             $("#answer_no").val(data);
         });
         </script>
 	</body>
