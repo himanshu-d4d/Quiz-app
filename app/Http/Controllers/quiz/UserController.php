@@ -16,8 +16,6 @@ use Redirect;
 use PDF;
 use File;
 use Mail;
-
-
 use Hash;
 use Auth;
 
@@ -65,13 +63,14 @@ class UserController extends Controller
     public function loginAttempt(Request $request){
         try{
             $data = $request->all();
-            //dd($data);
-            if($authData=User::where('name',$data['name'])->where('email',$data['email'])->first()){
-                //dd($authData);
-                Auth::login($authData);
-                return redirect('main-section');
-               
-            }
+            $credentials = [
+              'email'=>$data['email'],
+              'password'=>$data['password'],
+          ];
+          if(Auth::attempt($credentials)){
+            return redirect('main-section');
+          }
+          
             return redirect('user/login')->with('error',"please enter correct email or password");
         }catch(Exception $e){
             echo $e->getMessage();
@@ -265,11 +264,18 @@ public function viewPdf(){
     $filename = time();
     $path = storage_path('pdf');
     $allData = $data['total'];
+    $pdfAttachment = public_path() . '/' .'reserved/new_2.pdf';
+    $fillablePdf = public_path().'/'.'reserved/fillable_pdf.pdf';
+    // dd($pdfAttachment);
     $pdf = PDF::loadView('pdf_view', compact("allData"))->setPaper('a4', 'landscape')->save(''.$path.'/'.$filename.'.pdf');  
-    Mail::send('mail',$allData,function($messages) use($user,$pdf,$filename){
+    // dd($pdf->output());
+    
+    Mail::send('mail',$allData,function($messages) use($user,$pdfAttachment,$filename, $pdf, $fillablePdf){
       $messages->to("himanshu.d4d@gmail.com")
       ->subject("Traceability Chooser")
-      ->attachData($pdf->output(),$filename.'.pdf');
+      ->attachData($pdf->output(),$filename.'.pdf')
+      ->attach($pdfAttachment, array('as' => 'pdf-report.pdf', 'mime' => 'application/pdf'))
+      ->attach($fillablePdf, array('as' => 'pdf-fillable.pdf', 'mime' => 'application/pdf'));
      });
      $userData = new Report;
      $userData['user_id'] = $user->id;

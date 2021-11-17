@@ -43,13 +43,14 @@
                         <strong>{{ session('success') }}</strong>
                         </div>
                         @endif
+								 
 								  <div class="form-group">
-									<label for="name">First Name</label>
-									<input type="text" class="form-control" id="firstname" name="name"/>
+									<label for="email">Email</label>
+									<input type="email" class="form-control" id="email" name="email"/>
 								  </div>
 								  <div class="form-group">
-									<label for="email">Email address</label>
-									<input type="email" class="form-control" id="email" name="email"/>
+									<label for="name">Password</label>
+									<input type="text" class="form-control" id="password" name="password"/>
 								  </div>
 								  <button type="submit" class="btn btn-primary">Start the <br> chooser now</button>
 								  <a href ="{{url('user/signup')}}" class="btn btn-info">Sign Up</a>

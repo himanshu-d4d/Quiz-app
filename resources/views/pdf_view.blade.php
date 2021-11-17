@@ -129,7 +129,7 @@
     font-size: 30px;">Now you can assess the available technology and we have provided a selection of questions to ask a tech provider to make the right decision</p>
 	           <?php $data =  answerscore(); ?>
 	                   @foreach($data as $value)
-	                    <p> {{$value['color_list']}}</p>
+	                    <a href="#"> {{$value['color_list']}}</a>
 						@endforeach
 						</div>
 					</div>
