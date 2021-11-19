@@ -1,4 +1,7 @@
 <?php
+use App\Models\admin\Report;
+
+
 
 function loginUser(){
     $user = Auth::user();
@@ -6,7 +9,8 @@ function loginUser(){
 }
 
 function answerscore(){
-       // dd('hii');       
+       // dd('hii');  
+       //$user = Auth::user();     
     $data = Session::all();
     $question8=[];
     $question9=[];

@@ -104,10 +104,7 @@ Route::group(['middleware' => 'auth:admin'], function(){
         //Route::get('result/pdf', [UserController::class, 'createPDF']);
         Route::get('user/report', [UserController::class, 'reports']);
         Route::get('user/download-pdf/{filename}', [UserController::class, 'downloadPdf']);
+        Route::get('user/download-docx/{id}', [ReportController::class, 'downloadDocx']);
+        Route::get('user/download-odt/{id}', [ReportController::class, 'downloadODText']);
 
-
-        
-
-        
-
-  
+    

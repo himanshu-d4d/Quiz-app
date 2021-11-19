@@ -46,7 +46,11 @@
     <tr>
     <th style ="text-align:center;">Sr. no.</th>
     <th style ="text-align:center;">Date</th>
-    <th style ="text-align:center;">Action</th>
+    <th style ="text-align:center;width: 20%">Action</th>
+	<th style ="text-align:center;width: 15%"></th>
+	<th style ="text-align:center;width: 15%"></th>
+
+
     </tr>
   </thead>
   <tbody>
@@ -57,7 +61,10 @@
   <tr>
     <td style ="text-align:center;"><?php echo $i ?></td>
     <td style ="text-align:center;">{{$report->date}}</td>
-    <td style ="text-align:center;"> <a href="{{url('/user/download-pdf/'.$report->pdf)}}"  >View Report</a></td>
+    <td > <a href="{{url('/user/download-pdf/'.$report->pdf)}}"  >View Report</a></td>
+	<td > <a href="{{url('/user/download-docx/'.$report->id)}}"  >Download to Doc</a></td>
+	<td > <a href="{{url('/user/download-odt/'.$report->id)}}"  >Download to ODT</a></td>
+	
   </tr>
 @endforeach
     </tr>

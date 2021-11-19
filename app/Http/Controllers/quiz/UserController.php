@@ -18,6 +18,7 @@ use File;
 use Mail;
 use Hash;
 use Auth;
+use View;
 
 class UserController extends Controller
 {
@@ -264,9 +265,13 @@ public function viewPdf(){
     $filename = time();
     $path = storage_path('pdf');
     $allData = $data['total'];
+    //dd($allData);
     $pdfAttachment = public_path() . '/' .'reserved/new_2.pdf';
     $fillablePdf = public_path().'/'.'reserved/fillable_pdf.pdf';
     // dd($pdfAttachment);
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
     $pdf = PDF::loadView('pdf_view', compact("allData"))->setPaper('a4', 'landscape')->save(''.$path.'/'.$filename.'.pdf');  
     // dd($pdf->output());
     
@@ -281,6 +286,7 @@ public function viewPdf(){
      $userData['user_id'] = $user->id;
      $userData['user_name'] = $user->name;
      $userData['pdf'] = $filename;
+     $userData['answer_data'] = json_encode($allData);
      $userData['date'] = date("y-m-d");
      $userData->save();
      session()->forget('total'); 

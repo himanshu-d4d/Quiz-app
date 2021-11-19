@@ -5,6 +5,11 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\admin\Report;
+use View;
+use Session;
+use Storage;
+
+
 
 class ReportController extends Controller
 {
@@ -28,5 +33,33 @@ class ReportController extends Controller
             // read the file from disk
             readfile(''.$path.'/'.$filename.'.pdf');
         }
+    }
+    public function downloadDocx(Request $request, $id){
+        $data = Report::find($id);
+        $allData = json_decode($data['answer_data'],true);
+        //dd($allData);
+        $view_content = View::make('report_one', ['allData' => $allData])->render();
+        $headers = array(
+            "Content-type"=>"text/html",
+            "Content-Disposition"=>"attachment;Filename=myfile.doc"
+        );
+        
+        $content = $view_content;
+        
+        return \Response::make($content,200, $headers);
+    }
+    public function downloadODText(Request $request, $id){
+        $data = Report::find($id);
+        $allData = json_decode($data['answer_data'],true);
+        //dd($allData);
+        $view_content = View::make('report_one', ['allData' => $allData])->render();
+        $headers = array(
+            "Content-type"=>"text/html",
+            "Content-Disposition"=>"attachment;Filename=myfile.odt"
+        );
+        
+        $content = $view_content;
+        
+        return \Response::make($content,200, $headers);
     }
 }    
